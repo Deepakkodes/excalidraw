@@ -1,0 +1,14 @@
+.workspace { height: 100dvh; overflow: hidden; background: #f8fafc; }
+.canvas { height: 100%; min-height: 100dvh; }
+.filebar { position: fixed; z-index: 5; top: 16px; left: 16px; right: 16px; display: flex; align-items: center; gap: 12px; width: min(640px, calc(100% - 32px)); padding: 7px; border: 1px solid #e2e8f0; border-radius: 12px; background: rgba(255,255,255,.94); box-shadow: 0 8px 25px rgba(15,23,42,.12); backdrop-filter: blur(12px); }
+button { border: 0; border-radius: 8px; background: transparent; color: #334155; font: inherit; cursor: pointer; }
+button:hover { background: #f1f5f9; }
+.brand { padding: 8px 10px; font-weight: 700; color: #172554; }.brand-mark { color: #4f46e5; }
+.board-title { min-width: 0; flex: 1; display: grid; gap: 1px; }.board-title span { overflow: hidden; font-weight: 650; color: #0f172a; text-overflow: ellipsis; white-space: nowrap; }.board-title small, .board-row small, .snapshot-list small { color: #64748b; font-size: 11px; }
+.file-actions { display: flex; gap: 2px; }.file-actions button, .button-row button { padding: 8px 9px; font-size: 13px; }
+.file-panel { position: fixed; z-index: 6; top: 76px; left: 16px; width: min(360px, calc(100% - 32px)); max-height: calc(100dvh - 92px); overflow: auto; border: 1px solid #e2e8f0; border-radius: 14px; background: rgba(255,255,255,.98); box-shadow: 0 16px 40px rgba(15,23,42,.18); }
+.panel-heading, .panel-section { padding: 16px; }.panel-heading { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e2e8f0; }.panel-heading h1, .panel-section h2 { margin: 0; color: #0f172a; }.panel-heading h1 { font-size: 18px; }.panel-section h2 { font-size: 13px; }.panel-section { border-top: 1px solid #e2e8f0; }.panel-section p { margin: 6px 0 10px; color: #64748b; font-size: 12px; line-height: 1.45; }
+.primary { padding: 8px 10px; background: #4f46e5; color: white; font-size: 13px; font-weight: 600; }.primary:hover { background: #4338ca; }
+.board-list { padding: 8px; }.board-row { display: grid; width: 100%; gap: 3px; padding: 10px; text-align: left; }.board-row strong { color: #1e293b; font-size: 14px; }.board-row.active { background: #eef2ff; }.board-row.active strong { color: #3730a3; }
+.button-row { display: flex; gap: 8px; }.danger { color: #b91c1c; }.snapshot-list { display: grid; gap: 4px; }.snapshot-list button { padding: 8px; text-align: left; font-size: 12px; }
+@media (max-width: 560px) { .filebar { gap: 4px; }.file-actions button { padding: 8px 6px; }.brand { padding: 8px 6px; }.board-title small { display: none; } }
