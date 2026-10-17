@@ -34,6 +34,7 @@ function App() {
   const [boards, setBoards] = useState<BoardSummary[]>([])
   const [activeBoard, setActiveBoard] = useState<BoardRecord | null>(null)
   const [isFilesOpen, setIsFilesOpen] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(() => window.matchMedia('(prefers-color-scheme: dark)').matches)
   const [isLoading, setIsLoading] = useState(true)
   const [message, setMessage] = useState('')
   const [canvasVersion, setCanvasVersion] = useState(0)
@@ -164,7 +165,7 @@ function App() {
   const latestScene = activeBoard?.snapshots.at(-1)?.scene ?? EMPTY_SCENE
 
   return (
-    <main className="workspace">
+    <main className={isDarkMode ? 'workspace dark' : 'workspace'}>
       <header className="filebar">
         <button className="brand" onClick={() => setIsFilesOpen((open) => !open)} type="button">
           <span className="brand-mark">*</span> Boards
@@ -174,6 +175,9 @@ function App() {
           <small>{message || 'Autosaves to this browser'}</small>
         </div>
         <div className="file-actions">
+          <button aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'} onClick={() => setIsDarkMode((enabled) => !enabled)} type="button">
+            {isDarkMode ? 'Light' : 'Dark'}
+          </button>
           <button onClick={handleExport} type="button">Export</button>
           <button onClick={() => fileInputRef.current?.click()} type="button">Import</button>
           <input ref={fileInputRef} accept=".excalidraw,application/json" hidden onChange={handleImport} type="file" />
@@ -203,7 +207,7 @@ function App() {
       )}
 
       <section className="canvas" aria-busy={isLoading}>
-        {!isLoading && activeBoard && <Excalidraw key={`${activeBoard.id}-${canvasVersion}`} initialData={async () => loadFromBlob(new Blob([latestScene], { type: 'application/vnd.excalidraw+json' }), null, null)} onChange={(elements, appState, files) => persistScene(serializeAsJSON(elements, appState, files, 'local'))} />}
+        {!isLoading && activeBoard && <Excalidraw key={`${activeBoard.id}-${canvasVersion}`} theme={isDarkMode ? 'dark' : 'light'} initialData={async () => loadFromBlob(new Blob([latestScene], { type: 'application/vnd.excalidraw+json' }), null, null)} onChange={(elements, appState, files) => persistScene(serializeAsJSON(elements, appState, files, 'local'))} />}
       </section>
     </main>
   )
